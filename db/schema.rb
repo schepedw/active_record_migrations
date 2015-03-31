@@ -11,21 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331013905) do
+ActiveRecord::Schema.define(version: 20150331163114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account_types", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "accounts", force: :cascade do |t|
-    t.decimal  "balance"
-    t.integer  "account_type_id", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "user_id",         null: false
+    t.float    "balance",      default: 0.0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_id",                    null: false
+    t.string   "account_type",               null: false
   end
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
@@ -33,7 +29,10 @@ ActiveRecord::Schema.define(version: 20150331013905) do
   create_table "users", force: :cascade do |t|
     t.string  "first_name"
     t.string  "last_name"
-    t.integer "ssn"
+    t.integer "ssn",        null: false
+    t.string  "login",      null: false
   end
+
+  add_index "users", ["ssn"], name: "index_users_on_ssn", unique: true, using: :btree
 
 end
