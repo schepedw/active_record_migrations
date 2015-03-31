@@ -4,7 +4,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.decimal :balance
       t.integer :account_type_id, :null => false
       t.timestamps :null => false
-      t.belongs_to :user, index: true
+      t.belongs_to :user, index: true, :null => false
     end
   end
 
