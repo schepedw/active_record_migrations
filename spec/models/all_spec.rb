@@ -105,6 +105,9 @@ describe 'migrations' do
   end
 
   context 'step 6' do
+    after do
+      clear_bad_data
+    end
     it 'enforces referential integrity' do
       bad_account_type_id = AccountType.order(:id).last.id + 1
       expect{
@@ -118,6 +121,9 @@ describe 'migrations' do
 
   context 'step 7' do
 =begin
+    after do
+      clear_bad_data
+    end
     #note: this is broken into parts to incrementally test your migrations.
     #Comment out one part at a time, get it to pass, comment it out & uncomment the next
     context 'part 1' do
